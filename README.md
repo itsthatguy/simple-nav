@@ -1,32 +1,75 @@
 # simple-nav
 
-### Includes
-* Node
-* Express
-* Bower
-  * jQuery
-  * Ember
-  * Handlebars
-* Gulp
-* Browserify
-* Stylus
-* Coffeescript
+### Scss
 
-### Setup
+```scss
+$small: "only screen and (min-width: 40.063em)";
 
-1. Clone this repo
-2. run `npm install`
+nav.primary-navigation {
+  > h1 {
+    @include inline-block;
+  }
+  > .menu {
+    @include inline-icon('menu');
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 
+    span { display: none; }
+  }
 
-### Running
+  > ul {
+    display: block;
 
-1. For asset generation: `gulp watch`
-2. Run the server: `npm start`
-3. Browse to: `http://localhost:3002`
+    &.nav-links {
+      display: none;
+      float: right;
+    }
 
+    li {
+      @include inline-block;
+      margin-right: rem-calc(10px);
+      margin-top: rem-calc(12px);
+    }
+  }
 
-### Deploying
+  .button {
+    @include inline-block;
+    margin-bottom: 0;
+    margin-top: rem-calc(-2px);
+    padding: rem-calc(4px 6px);
+  }
 
-1. Create your heroku instance `heroku create`
-2. Deploy `git push heroku master`
-3. Dance.
+  @media #{$small} {
+    > .menu { display: none; }
+
+    > ul.nav-links {
+      display: block;
+    }
+  }
+
+  // When the body tag has the open class applied
+  body.open & {
+    > ul.nav-links { display: block; }
+    color: blue;
+  }
+}
+```
+
+## Markup
+```haml
+%nav.primary-navigation
+  - # Title & Menu Icon
+  %h1 Title
+  %a.menu(href="#") <span>Menu</span>
+
+  - # Nav links
+  %ul.nav-links
+    %li
+      %a(href="some-link") Some Link
+    %li
+      %a(href="some-other-link") Some Other Link
+    %li
+      %a.button(href="AWESOME") AWESOME
+```
