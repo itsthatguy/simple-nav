@@ -1,0 +1,24 @@
+{
+  "name": "simple-nav",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.coffee",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "build": "node_modules/.bin/coffee --bare --compile --output index.js index.coffee",
+    "prepublish": "node_modules/.bin/coffee --bare --compile --output index.js index.coffee",
+    "postpublish": "rm -rf index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "coffee-script": "^1.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsthatguy/simple-nav.git"
+  },
+  "devDependencies": { }
+}
