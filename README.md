@@ -9,6 +9,7 @@ nav.primary-navigation {
   > h1 {
     @include inline-block;
   }
+
   > .menu {
     @include inline-icon('menu');
     display: block;
@@ -19,13 +20,9 @@ nav.primary-navigation {
     span { display: none; }
   }
 
-  > ul {
-    display: block;
-
-    &.nav-links {
-      display: none;
-      float: right;
-    }
+  > ul.nav-links {
+    display: none;
+    float: right;
 
     li {
       @include inline-block;
@@ -52,7 +49,6 @@ nav.primary-navigation {
   // When the body tag has the open class applied
   body.open & {
     > ul.nav-links { display: block; }
-    color: blue;
   }
 }
 ```
