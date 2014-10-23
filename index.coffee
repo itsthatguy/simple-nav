@@ -57,4 +57,4 @@ class Navigation
 
     $(document).on 'scroll', @_handleScroll
 
-module.exports = new Navigation()
+module.exports = Navigation
