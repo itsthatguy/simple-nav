@@ -7,14 +7,15 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "pretest": "node_modules/.bin/browserify index.coffee --bare --transform=coffeeify --outfile test/app/index.js; sass test/app/index.scss > test/app/index.css",
+    "pretest": "scripts/compile.sh",
     "test": "node_modules/.bin/mocha test/simple_nav_test.coffee --opts test/mocha.opts --recursive",
-    "posttest": "rm -rf test/app/index.js test/app/index.css",
-    "build": "node_modules/.bin/browserify index.coffee --bare --transform=coffeeify --outfile index.js",
-    "prepublish": "node_modules/.bin/browserify index.coffee --bare --transform=coffeeify --outfile index.js",
-    "postpublish": "rm -rf index.js",
-    "prestart": "node_modules/.bin/browserify index.coffee --bare --transform=coffeeify --outfile test/app/index.js",
-    "start": "coffee test/test_server.coffee"
+    "posttest": "scripts/cleanup.sh",
+    "build": "scripts/compile.sh",
+    "prepublish": "scripts/compile.sh",
+    "postpublish": "scripts/cleanup.sh",
+    "prestart": "scripts/compile.sh",
+    "start": "coffee test/test_server.coffee",
+    "poststart": "scripts/cleanup.sh"
   },
   "author": "",
   "license": "ISC",

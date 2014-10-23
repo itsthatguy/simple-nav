@@ -21,7 +21,6 @@ class Navigation
       $('body').addClass('open')
 
   handleScroll: (e) =>
-    console.log @
     if $(e.target).scrollTop() <= @options.scrollTolerance
       $('body').removeClass('scrolled')
     else
@@ -38,7 +37,8 @@ class Navigation
     , Math.floor time
 
   constructor: (options) ->
-    @options = _.defaults(options, @defaults)
+    _.defaults(@options, @defaults)
+    _.extend(@options, options)
 
     @_gotoAnchor   = _.throttle @gotoAnchor, 500, { trailing: false }
     @_handleScroll = _.throttle @handleScroll, 300, true

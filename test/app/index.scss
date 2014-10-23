@@ -1,66 +1,101 @@
 $white: #fff;
-$primary-navigation-background-color: $white;
-
-$small: "only screen and (min-width: 40.063em)";
+$small-only: "only screen and (max-width: 40em)";
 $column-gutter: 15px;
 
+@mixin inline-block {
+  display: inline-block;
+}
+
+@mixin inline-icon($icon-name: '', $color: inherit, $pseudo: before, $font-size: false, $margin: 0, $padding: 0) {
+  &:#{$pseudo} {
+    @if $font-size { font-size: $font-size; }
+    -webkit-font-smoothing: antialiased;
+    color: $color;
+    content: 'X';
+    font-family: $icon-name;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    margin: $margin;
+    padding: $padding;
+    speak: none;
+    text-transform: none;
+  }
+}
+
+$primary-navigation-background-color: $white;
 
 nav.primary-navigation {
   background: $primary-navigation-background-color;
   padding-left: $column-gutter/2;
   padding-right: $column-gutter/2;
+  position: relative;
+  z-index: 100;
 
   > h1 {
-    display: inline-block;
+    @include inline-block;
   }
 
   > .menu {
-    display: block;
+    @include inline-icon('menu', $font-size: 20px);
+    display: none;
     position: absolute;
     right: 10px;
     top: 10px;
-
-    &:before {
-      content: "\e120";
-      color: inherit;
-      margin: 0;
-      padding: 0;
-    }
 
     span { display: none; }
   }
 
   > ul.nav-links {
-    display: none;
+    @include inline-block;
     float: right;
+    margin-left: 0;
 
     li {
-      display: inline-block;
-      margin-right: 10px;
-      margin-top: 12px;
+      @include inline-block;
+      margin-right: rem-calc(10px);
+      margin-top: rem-calc(12px);
 
       &:last-child { margin-right: 0; }
     }
   }
 
   .button {
-    display: inline-block;
+    @include inline-block;
     margin-bottom: 0;
-    margin-top: -2px;
-    padding: 4px 6px;
+    margin-top: rem-calc(-2px);
+    padding: rem-calc(4px 6px);
   }
 
-  @media #{$small} {
-    > .menu { display: none; }
+  @media #{$small-only} {
+    > .menu { display: block; }
 
     > ul.nav-links {
-      display: inline-block;
+      display: none;
+      background: $primary-navigation-background-color;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 40px;
+
+      li {
+        display: block;
+      }
+
+      body.open & {
+        display: block;
+        padding-left: $column-gutter/2;
+        padding-right: $column-gutter/2;
+        padding-bottom: $column-gutter;
+      }
     }
+
   }
 
   // When the body tag has the open class applied
   body.open & {
-    > ul.nav-links { display: block; }
+    > ul.nav-links {}
   }
 
   // When the page is scrolled
@@ -69,6 +104,5 @@ nav.primary-navigation {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
   }
 }
