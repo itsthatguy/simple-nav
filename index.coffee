@@ -1,6 +1,13 @@
-_ = require "underscore"
+_ = require('underscore')
 
 class Navigation
+  defaults:
+    scrollTolerance: 120
+    gotoSpeed: 10
+
+  options: {}
+
+  setTolerance: (n) -> @options.scrollTolerance = n
 
   closeMenu: ->
     $('body').removeClass('open')
@@ -14,21 +21,25 @@ class Navigation
       $('body').addClass('open')
 
   handleScroll: (e) =>
-    if $(e.target).scrollTop() <= 120
+    console.log @
+    if $(e.target).scrollTop() <= @options.scrollTolerance
       $('body').removeClass('scrolled')
     else
       $('body').addClass('scrolled')
 
   gotoAnchor: ($el) ->
+    speed    = @options.gotoSpeed
     position = $($el.attr('href')).offset().top
     distance = position - $(document).scrollTop()
-    speed = 10
-    time = Math.abs(distance) / speed
+    time     = Math.abs(distance) / speed
+
     $('html, body').animate
       scrollTop: position
     , Math.floor time
 
-  constructor: ->
+  constructor: (options) ->
+    @options = _.defaults(options, @defaults)
+
     @_gotoAnchor   = _.throttle @gotoAnchor, 500, { trailing: false }
     @_handleScroll = _.throttle @handleScroll, 300, true
     @_toggleMenu   = _.throttle @toggleMenu, 300, true

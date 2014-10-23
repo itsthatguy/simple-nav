@@ -1,0 +1,74 @@
+$white: #fff;
+$primary-navigation-background-color: $white;
+
+$small: "only screen and (min-width: 40.063em)";
+$column-gutter: 15px;
+
+
+nav.primary-navigation {
+  background: $primary-navigation-background-color;
+  padding-left: $column-gutter/2;
+  padding-right: $column-gutter/2;
+
+  > h1 {
+    display: inline-block;
+  }
+
+  > .menu {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    &:before {
+      content: "\e120";
+      color: inherit;
+      margin: 0;
+      padding: 0;
+    }
+
+    span { display: none; }
+  }
+
+  > ul.nav-links {
+    display: none;
+    float: right;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 12px;
+
+      &:last-child { margin-right: 0; }
+    }
+  }
+
+  .button {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: -2px;
+    padding: 4px 6px;
+  }
+
+  @media #{$small} {
+    > .menu { display: none; }
+
+    > ul.nav-links {
+      display: inline-block;
+    }
+  }
+
+  // When the body tag has the open class applied
+  body.open & {
+    > ul.nav-links { display: block; }
+  }
+
+  // When the page is scrolled
+  body.scrolled & {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+}

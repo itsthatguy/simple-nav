@@ -7,13 +7,19 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "build": "node_modules/.bin/coffee --bare --compile --output index.js index.coffee",
-    "prepublish": "node_modules/.bin/coffee --bare --compile --output index.js index.coffee",
-    "postpublish": "rm -rf index.js"
+    "pretest": "node_modules/.bin/browserify index.coffee --bare --transform=coffeeify --outfile test/app/index.js; sass test/app/index.scss > test/app/index.css",
+    "test": "node_modules/.bin/mocha test/simple_nav_test.coffee --opts test/mocha.opts --recursive",
+    "posttest": "rm -rf test/app/index.js test/app/index.css",
+    "build": "node_modules/.bin/browserify index.coffee --bare --transform=coffeeify --outfile index.js",
+    "prepublish": "node_modules/.bin/browserify index.coffee --bare --transform=coffeeify --outfile index.js",
+    "postpublish": "rm -rf index.js",
+    "prestart": "node_modules/.bin/browserify index.coffee --bare --transform=coffeeify --outfile test/app/index.js",
+    "start": "coffee test/test_server.coffee"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jquery": "^2.1.1",
     "underscore": "^1.7.0"
   },
   "repository": {
@@ -21,6 +27,15 @@
     "url": "https://github.com/itsthatguy/simple-nav.git"
   },
   "devDependencies": {
-    "coffee-script": "^1.7.1"
+    "browserify": "^6.1.0",
+    "chai": "^1.9.2",
+    "coffee-script": "^1.7.1",
+    "coffeeify": "^0.7.0",
+    "express": "^4.9.8",
+    "mocha": "^2.0.0",
+    "phantom": "^0.6.6",
+    "phantomjs": "^1.9.11",
+    "q": "^1.0.1",
+    "should": "^4.1.0"
   }
 }
