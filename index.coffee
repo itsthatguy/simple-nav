@@ -58,5 +58,7 @@ class Navigation
     $(document).on 'scroll', @_handleScroll
     $ =>
       @handleScroll(window)
+      if window.location.hash
+        @gotoAnchor(window.location.hash)
 
 module.exports = Navigation
