@@ -26,9 +26,9 @@ class Navigation
     else
       $('body').addClass('scrolled')
 
-  gotoAnchor: ($el) ->
+  gotoAnchor: (anchor) ->
     speed    = @options.gotoSpeed
-    position = $($el.attr('href')).offset().top
+    position = $(anchor).offset().top
     distance = position - $(document).scrollTop()
     time     = Math.abs(distance) / speed
 
@@ -49,7 +49,7 @@ class Navigation
     $('.navigation [href]').on 'click', (e) =>
       e.preventDefault()
       @closeMenu()
-      @_gotoAnchor($(e.currentTarget))
+      @_gotoAnchor($(e.currentTarget).attr('href'))
 
     $.each $('.title'), ->
       offset = $(this).find('a').outerWidth()
