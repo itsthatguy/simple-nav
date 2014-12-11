@@ -56,5 +56,7 @@ class Navigation
       $(this).find('.tooltip').css('left', offset)
 
     $(document).on 'scroll', @_handleScroll
+    $ =>
+      @handleScroll(window)
 
 module.exports = Navigation
