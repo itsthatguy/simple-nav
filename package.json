@@ -15,7 +15,8 @@
     "postpublish": "scripts/cleanup.sh",
     "prestart": "scripts/compile.sh",
     "start": "coffee test/test_server.coffee",
-    "poststart": "scripts/cleanup.sh"
+    "poststart": "scripts/cleanup.sh",
+    "watch": "node_modules/.bin/coffee --watch --output . --bare --compile index.coffee"
   },
   "author": "",
   "license": "ISC",

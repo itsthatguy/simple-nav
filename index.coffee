@@ -27,14 +27,15 @@ class Navigation
       $('body').addClass('scrolled')
 
   gotoAnchor: (anchor) ->
-    speed    = @options.gotoSpeed
-    position = $(anchor).offset().top
-    distance = position - $(document).scrollTop()
-    time     = Math.abs(distance) / speed
+    if $(anchor).offset()
+      speed    = @options.gotoSpeed
+      position = $(anchor).offset().top
+      distance = position - $(document).scrollTop()
+      time     = Math.abs(distance) / speed
 
-    $('html, body').animate
-      scrollTop: position
-    , Math.floor time
+      $('html, body').animate
+        scrollTop: position
+      , Math.floor time
 
   constructor: (options) ->
     _.defaults(@options, @defaults)
