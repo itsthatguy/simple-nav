@@ -27,7 +27,7 @@ class Navigation
       $('body').addClass('scrolled')
 
   gotoAnchor: (anchor) ->
-    if $(anchor).offset()
+    if $(anchor).length > 0
       speed    = @options.gotoSpeed
       position = $(anchor).offset().top
       distance = position - $(document).scrollTop()
