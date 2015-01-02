@@ -29,10 +29,8 @@ class Navigation
       $(this).find('.tooltip').css('left', offset)
 
     $(document).on 'scroll', @_handleScroll
-    $ =>
-      @handleScroll(window)
-      if window.location.hash
-        @gotoAnchor(window.location.hash)
+    @handleScroll()
+    @gotoAnchor(window.location.hash) if window.location.hash
 
   setTolerance: (n) -> @options.scrollTolerance = n
 
@@ -47,8 +45,8 @@ class Navigation
     else
       $('body').addClass(@options.expandedClass)
 
-  handleScroll: (e) =>
-    if $(e.target).scrollTop() <= @options.scrollTolerance
+  handleScroll: =>
+    if document.body.scrollTop <= @options.scrollTolerance
       $('body').removeClass(@options.scrolledClass)
     else
       $('body').addClass(@options.scrolledClass)
