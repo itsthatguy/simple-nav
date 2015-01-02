@@ -2,6 +2,8 @@ _ = require('underscore')
 
 class Navigation
   defaults:
+    scrolledClass: 'scrolled'
+    expandedClass: 'open'
     scrollTolerance: 120
     gotoSpeed: 10
 
@@ -10,21 +12,21 @@ class Navigation
   setTolerance: (n) -> @options.scrollTolerance = n
 
   closeMenu: ->
-    $('body').removeClass('open')
+    $('body').removeClass(@options.expandedClass)
 
   toggleMenu: (e) =>
     e.preventDefault()
 
-    if $('body.open').length > 0
+    if $("body.#{@options.expandedClass}").length > 0
       @closeMenu()
     else
-      $('body').addClass('open')
+      $('body').addClass(@options.expandedClass)
 
   handleScroll: (e) =>
     if $(e.target).scrollTop() <= @options.scrollTolerance
-      $('body').removeClass('scrolled')
+      $('body').removeClass(@options.scrolledClass)
     else
-      $('body').addClass('scrolled')
+      $('body').addClass(@options.scrolledClass)
 
   gotoAnchor: (anchor) ->
     if $(anchor).length > 0
