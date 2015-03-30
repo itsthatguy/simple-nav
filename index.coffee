@@ -7,15 +7,19 @@ class Navigation
     scrollTolerance: 120
     gotoSpeed: 10
 
+    gotoAnchorTimer: 500
+    handleScrollTimer: 300
+    toggleMenuTimer: 300
+
   options: {}
 
   constructor: (options) ->
     _.defaults(@options, @defaults)
     _.extend(@options, options)
 
-    @_gotoAnchor   = _.throttle @gotoAnchor, 500, { trailing: false }
-    @_handleScroll = _.throttle @handleScroll, 300, true
-    @_toggleMenu   = _.throttle @toggleMenu, 300, true
+    @_gotoAnchor   = _.throttle @gotoAnchor, @options.gotoAnchorTimer, { trailing: false }
+    @_handleScroll = _.throttle @handleScroll, @options.handleScrollTimer, true
+    @_toggleMenu   = _.throttle @toggleMenu, @options.toggleMenuTimer, true
 
     $('.menu').on 'click', @_toggleMenu
 
@@ -46,7 +50,7 @@ class Navigation
       $('body').addClass(@options.expandedClass)
 
   handleScroll: =>
-    if document.body.scrollTop <= @options.scrollTolerance
+    if window.pageYOffset <= @options.scrollTolerance
       $('body').removeClass(@options.scrolledClass)
     else
       $('body').addClass(@options.scrolledClass)
@@ -55,7 +59,7 @@ class Navigation
     if $(anchor).length > 0
       speed    = @options.gotoSpeed
       position = $(anchor).offset().top
-      distance = position - $(document).scrollTop()
+      distance = position - window.pageYOffset
       time     = Math.abs(distance) / speed
 
       $('html, body').animate
