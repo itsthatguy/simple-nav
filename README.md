@@ -1,5 +1,25 @@
 # simple-nav
 
+### Javascript
+
+#### with NPM
+
+```javascript
+SimpleNav = require('simple-nav')
+
+myNavigation = new SimpleNav({
+  // defaults
+  scrolledClass: 'scrolled'
+  expandedClass: 'open'
+  scrollTolerance: 120
+  gotoSpeed: 10
+
+  gotoAnchorTimer: 500
+  handleScrollTimer: 300
+  toggleMenuTimer: 300
+});
+```
+
 ### Scss
 
 ```scss
