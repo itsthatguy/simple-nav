@@ -1,6 +1,6 @@
 # simple-nav
 
-### Installationg
+### Installation
 
 ```
 npm install simple-nav --save
@@ -80,18 +80,20 @@ nav.primary-navigation {
 ```
 
 ## Markup
-```haml
-%nav.primary-navigation
-  - # Title & Menu Icon
-  %h1 Title
-  %a.menu(href="#") <span>Menu</span>
-
-  - # Nav links
-  %ul.nav-links
-    %li
-      %a(href="some-link") Some Link
-    %li
-      %a(href="some-other-link") Some Other Link
-    %li
-      %a.button(href="AWESOME") AWESOME
+```html
+<nav class="primary-navigation">
+  <h1>Title</h1>
+  <a class="menu" href="#"><span>Menu</span></a>
+  <ul class="nav-links">
+    <li>
+      <a href="some-link">Some Link</a>
+    </li>
+    <li>
+      <a href="some-other-link">Some Other Link</a>
+    </li>
+    <li>
+      <a class="button" href="AWESOME">AWESOME</a>
+    </li>
+  </ul>
+</nav>
 ```
