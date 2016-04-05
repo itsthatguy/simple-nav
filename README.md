@@ -1,5 +1,11 @@
 # simple-nav
 
+### Installationg
+
+```
+npm install simple-nav --save
+```
+
 ### Javascript
 
 #### with NPM
